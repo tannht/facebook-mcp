@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "facebook-mcp"
+version = "1.0.0"
+description = "MCP server for Facebook Pages: publish posts, photos, videos and Reels, manage scheduled posts and read insights through the Meta Graph API."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Hoang Tan" }]
+keywords = ["mcp", "model-context-protocol", "facebook", "meta", "graph-api", "reels", "claude"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Internet",
+]
+dependencies = [
+  "mcp>=1.21.2",
+  "requests>=2.31",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+facebook-mcp = "facebook_mcp.server:main"
+facebook-mcp-check = "facebook_mcp.check:main"
+facebook-mcp-token = "facebook_mcp.token_tool:main"
+
+[project.urls]
+Homepage = "https://github.com/tannht/facebook-mcp"
+Issues = "https://github.com/tannht/facebook-mcp/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/facebook_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I"]
+ignore = ["E501"]
